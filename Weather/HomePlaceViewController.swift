@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  HomePlaceViewController.swift
 //  Weather
 //
 //  Created by Vladimir on 17.10.16.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class HomePlaceViewController: UIViewController {
 
+    var dataModel: WeatherModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

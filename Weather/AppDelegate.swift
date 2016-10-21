@@ -12,10 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let dataModel = WeatherModel()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let tabBarController = window?.rootViewController as! UITabBarController
+        let currentController = tabBarController.customizableViewControllers?[0] as! CurrentPlaseViewController
+        let homeController = tabBarController.customizableViewControllers?[1] as! HomePlaceViewController
+        currentController.dataModel = dataModel
+        homeController.dataModel = dataModel
         return true
     }
 

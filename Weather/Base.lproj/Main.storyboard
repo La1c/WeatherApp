@@ -20,14 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Town" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgN-BX-P8e">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="1B8-Fe-aU1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updated: Just Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fa-d6-qUj">
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -46,9 +38,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UP-rX-lMb">
-                                <frame key="frameInset" minX="173" minY="568" width="53" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UP-rX-lMb">
                                 <state key="normal" title="Refresh"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daY-pE-7Es">
@@ -72,9 +62,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Town" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgN-BX-P8e">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1B8-Fe-aU1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7UP-rX-lMb" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="2rV-ry-cFA"/>
                             <constraint firstItem="Y5b-ra-9xc" firstAttribute="centerY" secondItem="9AZ-SB-J4A" secondAttribute="centerY" id="487-Vl-Suu"/>
                             <constraint firstItem="9AZ-SB-J4A" firstAttribute="centerY" secondItem="daY-pE-7Es" secondAttribute="centerY" id="5VJ-wu-52P"/>
                             <constraint firstItem="hSQ-kP-zjR" firstAttribute="top" secondItem="4p3-W3-hbT" secondAttribute="bottom" constant="8" id="6CO-KV-HaR"/>
@@ -82,6 +81,7 @@
                             <constraint firstItem="Y5b-ra-9xc" firstAttribute="leading" secondItem="9AZ-SB-J4A" secondAttribute="trailing" constant="8" id="9ex-4A-Axa"/>
                             <constraint firstItem="4p3-W3-hbT" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="centerX" id="DAX-cg-z0T"/>
                             <constraint firstAttribute="trailing" secondItem="4p3-W3-hbT" secondAttribute="trailing" id="EMp-2x-rlK"/>
+                            <constraint firstItem="WgN-BX-P8e" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="KQd-7w-NaN"/>
                             <constraint firstAttribute="centerXWithinMargins" secondItem="79u-HE-1JF" secondAttribute="trailing" id="WXk-fo-9rV"/>
                             <constraint firstItem="79u-HE-1JF" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="Whi-1X-u9O"/>
                             <constraint firstItem="hSQ-kP-zjR" firstAttribute="leading" secondItem="daY-pE-7Es" secondAttribute="trailing" constant="8" id="WyD-Ia-P1q"/>
@@ -92,16 +92,16 @@
                             <constraint firstItem="WgN-BX-P8e" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="nDq-ph-W89"/>
                             <constraint firstItem="79u-HE-1JF" firstAttribute="top" secondItem="1Fa-d6-qUj" secondAttribute="bottom" constant="8" id="pLk-7w-60V"/>
                             <constraint firstItem="4p3-W3-hbT" firstAttribute="top" secondItem="1Fa-d6-qUj" secondAttribute="bottom" constant="8" id="qeE-RL-Ukd"/>
-                            <constraint firstItem="WgN-BX-P8e" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="8" id="uU5-ci-3kq"/>
                             <constraint firstItem="hSQ-kP-zjR" firstAttribute="top" secondItem="4p3-W3-hbT" secondAttribute="bottom" constant="8" id="uzh-ZB-teF"/>
                             <constraint firstItem="daY-pE-7Es" firstAttribute="centerY" secondItem="hSQ-kP-zjR" secondAttribute="centerY" id="ykb-LB-yO8"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="7UP-rX-lMb" secondAttribute="bottom" constant="8" id="zOD-KE-bVl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Here" image="first" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="719" y="0.0"/>
         </scene>
         <!--Home-->
         <scene sceneID="wg7-f3-ORb">
@@ -179,10 +179,10 @@
                             <constraint firstAttribute="trailing" secondItem="dHi-CY-rh3" secondAttribute="trailing" id="NVu-7W-nea"/>
                             <constraint firstAttribute="trailing" secondItem="0ti-NV-t5i" secondAttribute="trailing" id="O9w-5y-vOK"/>
                             <constraint firstItem="H6l-5z-aI6" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Op8-yt-sUu"/>
+                            <constraint firstItem="dHi-CY-rh3" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" id="Qdb-aP-hh7"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="tna-dz-bZP" secondAttribute="bottom" constant="8" id="aRV-xf-Erf"/>
                             <constraint firstItem="6ah-HP-O3n" firstAttribute="leading" secondItem="9jX-Md-9aC" secondAttribute="trailing" constant="8" id="avn-Nc-XdC"/>
                             <constraint firstAttribute="trailing" secondItem="6ah-HP-O3n" secondAttribute="trailing" id="cN5-lr-iMZ"/>
-                            <constraint firstItem="dHi-CY-rh3" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" id="cY9-zx-BsT"/>
                             <constraint firstItem="6ah-HP-O3n" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="iUt-vQ-0LS"/>
                             <constraint firstItem="qbp-SB-Zq0" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="oYP-Ra-Xag"/>
                             <constraint firstItem="6ah-HP-O3n" firstAttribute="top" secondItem="H6l-5z-aI6" secondAttribute="bottom" constant="8" id="q9J-FT-W41"/>
@@ -195,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="359.37031484257875"/>
+            <point key="canvasLocation" x="1434" y="0.0"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
