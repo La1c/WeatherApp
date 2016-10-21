@@ -16,11 +16,11 @@ class Forecast{
     let imageName: String
     let weatherName: String
     let weathetDescription: String
-    let cityName: String?
+    let cityName: String
     let countryName: String
     
     
-    init(currentWeatherTemperature: Double?, precipitationProbability: Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String?, counryName: String) {
+    init(currentWeatherTemperature: Double?, precipitationProbability: Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String, countryName: String) {
         self.currentTemperature = currentWeatherTemperature
         self.precipitationProbability = precipitationProbability
         self.timestamp = timestamp
@@ -29,6 +29,6 @@ class Forecast{
         self.weatherName = weatherName
         self.weathetDescription = weathetDescription
         self.cityName = cityName
-        self.countryName = counryName
+        self.countryName = countryName
     }
 }

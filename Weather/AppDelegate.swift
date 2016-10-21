@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let tabBarController = window?.rootViewController as! UITabBarController
-        let currentController = tabBarController.customizableViewControllers?[0] as! CurrentPlaseViewController
-        let homeController = tabBarController.customizableViewControllers?[1] as! HomePlaceViewController
+        let currentController = tabBarController.viewControllers?[0] as! CurrentPlaceViewController
+        let homeController = tabBarController.viewControllers?[1] as! HomePlaceViewController
         currentController.dataModel = dataModel
         homeController.dataModel = dataModel
         return true

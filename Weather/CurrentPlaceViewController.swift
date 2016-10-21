@@ -8,7 +8,16 @@
 
 import UIKit
 
-class CurrentPlaseViewController: UIViewController {
+class CurrentPlaceViewController: UIViewController {
+    
+    @IBOutlet weak var currentCityNameLabel: UILabel!
+    @IBOutlet weak var updateStatusLabel: UILabel!
+    @IBOutlet weak var currentWeatherImageView: UIImageView!
+    @IBOutlet weak var currentTemperatureLabel: UILabel!
+    @IBOutlet weak var currentPrecepitationProbabilityLabel: UILabel!
+    @IBOutlet weak var currentTrafficLevelLabel: UILabel!
+    @IBOutlet weak var currentPrecepitationProbabilityLevelImageView: UIImageView!
+    
     
     var dataModel: WeatherModel!
     
@@ -20,8 +29,7 @@ class CurrentPlaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentForecast = updateForecast()
-        
+     //   currentForecast = dataModel.currentForecast
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -32,13 +40,18 @@ class CurrentPlaseViewController: UIViewController {
     
     
     func updateUI(){
-        
+        currentCityNameLabel.text = currentForecast?.cityName
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        if let temperature = currentForecast?.currentTemperature{
+             currentTemperatureLabel.text = formatter.string(from: temperature as NSNumber)
+        }
+        currentWeatherImageView.image = dataModel.picsDictionary[currentForecast?.imageName ?? "01d"]
     }
     
     func updateForecast() -> Forecast?{
         dataModel.updateCurrentForecast()
         return dataModel.currentForecast
-        
     }
     
     

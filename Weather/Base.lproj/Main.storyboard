@@ -11,7 +11,7 @@
         <!--Here-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="CurrentPlaceViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -46,7 +46,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IsoRainSwrsDay" translatesAutoresizingMaskIntoConstraints="NO" id="hSQ-kP-zjR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IsoRainSwrsDay" translatesAutoresizingMaskIntoConstraints="NO" id="hSQ-kP-zjR">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="iKb-cu-QlP"/>
                                     <constraint firstAttribute="width" constant="60" id="mbb-pY-CwH"/>
@@ -98,6 +98,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Here" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="currentCityNameLabel" destination="WgN-BX-P8e" id="gqp-vQ-FrU"/>
+                        <outlet property="currentPrecepitationProbabilityLabel" destination="daY-pE-7Es" id="lc1-4T-ui2"/>
+                        <outlet property="currentPrecepitationProbabilityLevelImageView" destination="hSQ-kP-zjR" id="FIb-IF-MkK"/>
+                        <outlet property="currentTemperatureLabel" destination="79u-HE-1JF" id="JlO-ZZ-Arg"/>
+                        <outlet property="currentTrafficLevelLabel" destination="Y5b-ra-9xc" id="po2-gz-I3u"/>
+                        <outlet property="currentWeatherImageView" destination="4p3-W3-hbT" id="1RX-FB-FKj"/>
+                        <outlet property="updateStatusLabel" destination="1Fa-d6-qUj" id="sRD-Aq-JcI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -106,7 +115,7 @@
         <!--Home-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="HomePlaceViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
