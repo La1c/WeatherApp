@@ -29,7 +29,7 @@ class CurrentPlaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     //   currentForecast = dataModel.currentForecast
+        currentForecast = dataModel.currentForecast
         // Do any additional setup after loading the view, typically from a nib.
     }
 
