@@ -12,5 +12,6 @@ TO-DO:
   * Implement background which changes due to weather/time of day
   * Fix bugs, meke code better
   
- Screenshots:
+  
+Screenshots:
  
