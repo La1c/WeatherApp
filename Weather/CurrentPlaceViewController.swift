@@ -10,14 +10,17 @@ import UIKit
 
 class CurrentPlaceViewController: UIViewController {
     
+    @IBOutlet weak var morningTemperatureLabel: UILabel!
+    @IBOutlet weak var eveningTemperatureLabel: UILabel!
+    @IBOutlet weak var nightTemperatureLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var dayTemperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var currentCityNameLabel: UILabel!
     @IBOutlet weak var weatherNameLabel: UILabel!
     @IBOutlet weak var updateStatusLabel: UILabel!
     @IBOutlet weak var currentWeatherImageView: UIImageView!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
-    @IBOutlet weak var currentPrecepitationProbabilityLabel: UILabel!
     @IBOutlet weak var minTemperatureLabel: UILabel!
     @IBOutlet weak var currentTrafficLevelLabel: UILabel!
     @IBOutlet weak var maxTemperatureLable: UILabel!
@@ -29,7 +32,12 @@ class CurrentPlaceViewController: UIViewController {
         didSet{
             updateUI()
         }
-       
+    }
+    
+    var currentDailyForecast:Forecast?{
+        didSet{
+            updateDailyUI()
+        }
     }
 
     @IBAction func updateButtonPressed(_ sender: UIButton) {
@@ -39,7 +47,15 @@ class CurrentPlaceViewController: UIViewController {
         super.viewDidLoad()
         
         //Listening for changes in the model
-        NotificationCenter.default.addObserver(self, selector: #selector(CurrentPlaceViewController.heardNotification), name: NSNotification.Name(rawValue: currentWeatherNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CurrentPlaceViewController.heardNotification),
+                                               name: NSNotification.Name(rawValue: currentWeatherNotificationKey),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CurrentPlaceViewController.heardDailyNotification),
+                                               name: NSNotification.Name(rawValue: currentDailyWeatherNotificationKey),
+                                               object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +65,10 @@ class CurrentPlaceViewController: UIViewController {
     //update Forecast when recieved new data
     func heardNotification(){
         self.currentForecast = dataModel.currentForecast
+    }
+    
+    func heardDailyNotification(){
+        self.currentDailyForecast = dataModel.currentDayForecast
     }
     
     
@@ -77,12 +97,29 @@ class CurrentPlaceViewController: UIViewController {
         currentWeatherImageView.image = dataModel.picsDictionary[currentForecast?.imageName ?? "01d"]
         weatherNameLabel.text = currentForecast?.weatherName
         updateStatusLabel.text = "Updated: " + (formatDate(from: currentForecast?.timestamp) ?? "Just Now")
+    }
+    
+    func updateDailyUI(){
+        if let dayTemp = currentDailyForecast?.dayTemperature{
+            dayTemperatureLabel.text =  "\(dayTemp > 0 ? "+" : "")\(round(dayTemp))˚"
+        }
         
+        if let mornTemp = currentDailyForecast?.morningTemperature{
+            morningTemperatureLabel.text =  "\(mornTemp > 0 ? "+" : "")\(round(mornTemp))˚"
+        }
         
+        if let eveTemp = currentDailyForecast?.eveTemperature{
+            eveningTemperatureLabel.text =  "\(eveTemp > 0 ? "+" : "")\(round(eveTemp))˚"
+        }
+        
+        if let nightTemp = currentDailyForecast?.nightTemperature{
+            nightTemperatureLabel.text =  "\(nightTemp > 0 ? "+" : "")\(round(nightTemp))˚"
+        }
     }
     
     func updateForecast(){
         dataModel.updateCurrentForecast()
+        dataModel.updateCurrentForecastForADay()
     }
 }
 

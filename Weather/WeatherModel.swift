@@ -13,12 +13,15 @@ import UIKit
 import Keys
 
 let currentWeatherNotificationKey = "currentWeatherKey"
+let currentDailyWeatherNotificationKey = "currentWeatherForDayKey"
 let homeWeatherNotificationKey = "homeWeatherKey"
 
 class WeatherModel{
     
     var currentForecast:Forecast?
+    var currentDayForecast:Forecast?
     var homeForecast:Forecast?
+    var homeDayForecast: Forecast?
     var currentLocation:(longtitude: Double, latitude: Double)?
     var homeLocation:(longtitude: Double, latitude: Double)? = (30.315785, 59.939039) //SPb coord
     let keys = WeatherKeys()
@@ -49,6 +52,7 @@ class WeatherModel{
     init() {
         currentLocation = getCurrentLocation()
         updateCurrentForecast()
+        updateCurrentForecastForADay()
        // updateHomeForecast()
     }
     
@@ -86,9 +90,9 @@ class WeatherModel{
                 let newCountryName = json["sys"]["country"].stringValue
                 let newForecast = Forecast(currentWeatherTemperature: newTemperature,
                                            maxTemperature: newMaxTemperature,
+                                           minTemperature: newMinTemperature,
                                            humidity: newHumidity,
                                            pressure: newPressure,
-                                           minTemperature: newMinTemperature,
                                            timestamp: newTimestamp,
                                            imageName: newImageName,
                                            locationCoordinates: location,
@@ -100,12 +104,50 @@ class WeatherModel{
         }
     }
     
+    func getForecastForADay(for location: (longtitude: Double, latitude: Double),
+                            completion:@escaping (_ forecast: Forecast?) -> Void){
+        Alamofire.request("http://api.openweathermap.org/data/2.5/forecast/daily",
+                          parameters: ["lat":location.latitude,
+                                       "lon": location.longtitude,
+                                       "APPID": keys.openWeatherAPIKey()!,
+                                       "units":"metric",
+                                       "cnt":1])
+            .responseJSON{response in
+                guard response.result.isSuccess else{
+                    print(response.result.error)
+                    return
+                }
+                
+                let json = JSON(response.result.value!)
+                let newMorningTemperature = json["list"].arrayValue[0]["temp"]["morn"].double
+                let newDayTemperature = json["list"].arrayValue[0]["temp"]["day"].double
+                let newEveTemperature = json["list"].arrayValue[0]["temp"]["eve"].double
+                let newNightTemperature = json["list"].arrayValue[0]["temp"]["night"].double
+
+                let newDayForecast = Forecast(morningTemperature: newMorningTemperature,
+                                              dayTemperature: newDayTemperature,
+                                              eveTemperature: newEveTemperature,
+                                              nightTemperature: newNightTemperature)
+                completion(newDayForecast)
+
+        }
+    }
+    
     
     func updateCurrentForecast(){
         if let location = currentLocation{
             getForecast(for: location, completion: {
                 self.currentForecast = $0
                 NotificationCenter.default.post(name: Notification.Name(rawValue: currentWeatherNotificationKey), object: self)
+            })
+        }
+    }
+    
+    func updateCurrentForecastForADay(){
+        if let location = currentLocation{
+            getForecastForADay(for: location, completion: {
+                self.currentDayForecast = $0
+                NotificationCenter.default.post(name: Notification.Name(rawValue: currentDailyWeatherNotificationKey), object: self)
             })
         }
     }
