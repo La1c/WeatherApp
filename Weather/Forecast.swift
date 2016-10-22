@@ -13,7 +13,8 @@ class Forecast{
     let currentTemperature: Double?
     let maxTemperature: Double?
     let minTemperature: Double?
-    let precipitationProbability: Double?
+    let humidity: Int?
+    let pressure: Double?
     let timestamp: Double
     let imageName: String
     let weatherName: String
@@ -22,11 +23,12 @@ class Forecast{
     let countryName: String
     
     
-    init(currentWeatherTemperature: Double?, maxTemperature:Double?, minTemperature:Double?, precipitationProbability: Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String, countryName: String) {
+    init(currentWeatherTemperature: Double?, maxTemperature:Double?, humidity: Int?, pressure: Double?, minTemperature:Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String, countryName: String) {
         self.currentTemperature = currentWeatherTemperature
         self.maxTemperature = maxTemperature
         self.minTemperature = minTemperature
-        self.precipitationProbability = precipitationProbability
+        self.humidity = humidity
+        self.pressure = pressure
         self.timestamp = timestamp
         self.imageName = imageName
         self.currentCoord = locationCoordinates

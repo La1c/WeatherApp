@@ -10,6 +10,8 @@ import UIKit
 
 class CurrentPlaceViewController: UIViewController {
     
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var currentCityNameLabel: UILabel!
     @IBOutlet weak var weatherNameLabel: UILabel!
     @IBOutlet weak var updateStatusLabel: UILabel!
@@ -18,7 +20,6 @@ class CurrentPlaceViewController: UIViewController {
     @IBOutlet weak var currentPrecepitationProbabilityLabel: UILabel!
     @IBOutlet weak var minTemperatureLabel: UILabel!
     @IBOutlet weak var currentTrafficLevelLabel: UILabel!
-    @IBOutlet weak var currentPrecepitationProbabilityLevelImageView: UIImageView!
     @IBOutlet weak var maxTemperatureLable: UILabel!
     
     var dataModel: WeatherModel!
@@ -65,9 +66,18 @@ class CurrentPlaceViewController: UIViewController {
             minTemperatureLabel.text = "\(minTemp > 0 ? "+" : "")\(round(minTemp))˚C"
         }
         
+        if let humidity = currentForecast?.humidity{
+            humidityLabel.text = "\(humidity)%"
+        }
+        
+        if let pressure = currentForecast?.pressure{
+            pressureLabel.text = "\(round(pressure * 0.750062))"
+        }
+        
         currentWeatherImageView.image = dataModel.picsDictionary[currentForecast?.imageName ?? "01d"]
         weatherNameLabel.text = currentForecast?.weatherName
         updateStatusLabel.text = "Updated: " + (formatDate(from: currentForecast?.timestamp) ?? "Just Now")
+        
         
     }
     
