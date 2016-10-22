@@ -29,13 +29,18 @@ class CurrentPlaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentForecast = dataModel.currentForecast
+        NotificationCenter.default.addObserver(self, selector: #selector(CurrentPlaceViewController.heardNotification), name: NSNotification.Name(rawValue: currentWeatherNotificationKey), object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func heardNotification(){
+        self.currentForecast = dataModel.currentForecast
+        updateUI()
     }
     
     

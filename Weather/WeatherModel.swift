@@ -12,6 +12,9 @@ import Alamofire
 import UIKit
 import Keys
 
+let currentWeatherNotificationKey = "currentWeatherKey"
+let homeWeatherNotificationKey = "homeWeatherKey"
+
 class WeatherModel{
     
     var currentForecast:Forecast?
@@ -85,7 +88,6 @@ class WeatherModel{
                                            weathetDescription: newWeatherDescription,
                                            cityName: newCityName,
                                            countryName: newCountryName)
-                print(newForecast)
                 completion(newForecast)
         }
     }
@@ -93,14 +95,19 @@ class WeatherModel{
     
     func updateCurrentForecast(){
         if let location = currentLocation{
-            getForecast(for: location) {forecast in
-                self.currentForecast = forecast}
+            getForecast(for: location, completion: {
+                self.currentForecast = $0
+                NotificationCenter.default.post(name: Notification.Name(rawValue: currentWeatherNotificationKey), object: self)
+            })
         }
     }
     
     func updateHomeForecast(){
         if let location = homeLocation{
-            getForecast(for: location, completion: {self.homeForecast = $0})
+            getForecast(for: location, completion: {
+                self.homeForecast = $0
+                NotificationCenter.default.post(name: Notification.Name(rawValue: homeWeatherNotificationKey), object: self)
+            })
         }
     }
 
