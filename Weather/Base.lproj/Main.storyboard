@@ -40,6 +40,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UP-rX-lMb">
                                 <state key="normal" image="arrow-flip-1"/>
+                                <connections>
+                                    <action selector="updateButtonPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="JcV-sX-UYZ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="daY-pE-7Es">
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
@@ -134,7 +137,8 @@
                         <outlet property="currentTemperatureLabel" destination="79u-HE-1JF" id="JlO-ZZ-Arg"/>
                         <outlet property="currentTrafficLevelLabel" destination="Y5b-ra-9xc" id="po2-gz-I3u"/>
                         <outlet property="currentWeatherImageView" destination="4p3-W3-hbT" id="1RX-FB-FKj"/>
-                        <outlet property="updateStatusLabel" destination="1Fa-d6-qUj" id="sRD-Aq-JcI"/>
+                        <outlet property="updateStatusLabel" destination="tzS-7W-4hh" id="cBM-OA-szm"/>
+                        <outlet property="weatherNameLabel" destination="1Fa-d6-qUj" id="Y9h-Q0-U6f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

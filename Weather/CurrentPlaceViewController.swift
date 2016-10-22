@@ -11,6 +11,8 @@ import UIKit
 class CurrentPlaceViewController: UIViewController {
     
     @IBOutlet weak var currentCityNameLabel: UILabel!
+    
+    @IBOutlet weak var weatherNameLabel: UILabel!
     @IBOutlet weak var updateStatusLabel: UILabel!
     @IBOutlet weak var currentWeatherImageView: UIImageView!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
@@ -27,40 +29,53 @@ class CurrentPlaceViewController: UIViewController {
         }
     }
 
+    @IBAction func updateButtonPressed(_ sender: UIButton) {
+        updateForecast()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Listening for cahnges in the model
         NotificationCenter.default.addObserver(self, selector: #selector(CurrentPlaceViewController.heardNotification), name: NSNotification.Name(rawValue: currentWeatherNotificationKey), object: nil)
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    //update UI when recieved new data
     func heardNotification(){
         self.currentForecast = dataModel.currentForecast
-        updateUI()
     }
     
     
     func updateUI(){
         currentCityNameLabel.text = currentForecast?.cityName
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
         if let temperature = currentForecast?.currentTemperature{
-             currentTemperatureLabel.text = formatter.string(from: temperature as NSNumber)
+            let sign = temperature > 0 ? "+" : ""
+             currentTemperatureLabel.text = "\(sign)\(round(temperature))˚C"
         }
         currentWeatherImageView.image = dataModel.picsDictionary[currentForecast?.imageName ?? "01d"]
+        weatherNameLabel.text = currentForecast?.weatherName
+        updateStatusLabel.text = "Updated: " + (formatDate(from: currentForecast?.timestamp) ?? "Just Now")
     }
     
-    func updateForecast() -> Forecast?{
+    func updateForecast(){
         dataModel.updateCurrentForecast()
-        return dataModel.currentForecast
     }
-    
-    
+}
 
 
+extension CurrentPlaceViewController{
+    func formatDate(from utc: Double?) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.timeZone = TimeZone.current
+        
+        if let time = utc{
+            return dateFormatter.string(from: Date(timeIntervalSince1970: time))
+        }
+        return nil
+    }
 }
 

@@ -63,7 +63,8 @@ class WeatherModel{
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather",
             parameters: ["lat":location.latitude,
                          "lon": location.longtitude,
-                         "APPID": keys.openWeatherAPIKey()!])
+                         "APPID": keys.openWeatherAPIKey()!,
+                         "units":"metric"])
             .responseJSON{response in
             guard response.result.isSuccess else{
                 print(response.result.error)
