@@ -74,6 +74,8 @@ class WeatherModel{
             
                 let json = JSON(response.result.value!)
                 let newTemperature = json["main"]["temp"].double
+                let newMaxTemperature = json["main"]["temp_max"].double
+                let newMinTemperature = json["main"]["temp_min"].double
                 let newTimestamp = json["dt"].doubleValue
                 let newImageName = json["weather"].arrayValue[0]["icon"].stringValue
                 let newWeatherName = json["weather"].arrayValue[0]["main"].stringValue
@@ -81,6 +83,8 @@ class WeatherModel{
                 let newCityName = json["name"].stringValue
                 let newCountryName = json["sys"]["country"].stringValue
                 let newForecast = Forecast(currentWeatherTemperature: newTemperature,
+                                           maxTemperature: newMaxTemperature,
+                                           minTemperature: newMinTemperature,
                                            precipitationProbability: nil,
                                            timestamp: newTimestamp,
                                            imageName: newImageName,

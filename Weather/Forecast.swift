@@ -11,6 +11,8 @@ import Foundation
 class Forecast{
     let currentCoord:(longtitude: Double, latitude: Double)?
     let currentTemperature: Double?
+    let maxTemperature: Double?
+    let minTemperature: Double?
     let precipitationProbability: Double?
     let timestamp: Double
     let imageName: String
@@ -20,8 +22,10 @@ class Forecast{
     let countryName: String
     
     
-    init(currentWeatherTemperature: Double?, precipitationProbability: Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String, countryName: String) {
+    init(currentWeatherTemperature: Double?, maxTemperature:Double?, minTemperature:Double?, precipitationProbability: Double?, timestamp: Double, imageName: String, locationCoordinates: (Double, Double)?, weatherName:String, weathetDescription: String, cityName: String, countryName: String) {
         self.currentTemperature = currentWeatherTemperature
+        self.maxTemperature = maxTemperature
+        self.minTemperature = minTemperature
         self.precipitationProbability = precipitationProbability
         self.timestamp = timestamp
         self.imageName = imageName
