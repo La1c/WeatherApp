@@ -14,6 +14,7 @@ import Keys
 
 let currentWeatherNotificationKey = "currentWeatherKey"
 let currentDailyWeatherNotificationKey = "currentWeatherForDayKey"
+let homeDailyWeatherNotificationKey = "homeWeatherForDayKey"
 let homeWeatherNotificationKey = "homeWeatherKey"
 
 class WeatherModel{
@@ -53,7 +54,8 @@ class WeatherModel{
         currentLocation = getCurrentLocation()
         updateCurrentForecast()
         updateCurrentForecastForADay()
-       // updateHomeForecast()
+        updateHomeForecastForADay()
+        updateHomeForecast()
     }
     
     func getCurrentLocation() -> (longtitude: Double, latitude: Double)?{
@@ -157,6 +159,15 @@ class WeatherModel{
             getForecast(for: location, completion: {
                 self.homeForecast = $0
                 NotificationCenter.default.post(name: Notification.Name(rawValue: homeWeatherNotificationKey), object: self)
+            })
+        }
+    }
+    
+    func updateHomeForecastForADay(){
+        if let location = homeLocation{
+            getForecastForADay(for: location, completion: {
+                self.homeDayForecast = $0
+                NotificationCenter.default.post(name: Notification.Name(rawValue: homeDailyWeatherNotificationKey), object: self)
             })
         }
     }
