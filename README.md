@@ -5,7 +5,7 @@ Weather App for VKU
 Simple weather app.
 
 In current version:
- * Showes current temperature, city name and forecast for a day
+ * Shows current temperature, city name and forecast for a day
  
 TO-DO:
   * Complete second screen
