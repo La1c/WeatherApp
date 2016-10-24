@@ -10,7 +10,7 @@ In current version:
 TO-DO:
   * Complete second screen
   * Implement background which changes due to weather/time of day
-  * Fix bugs, meke code better
+  * Fix bugs, make code better
   
   
 Screenshots:
