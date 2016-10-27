@@ -48,22 +48,22 @@ class WeatherModel{
         "50n":#imageLiteral(resourceName: "Mist")
     ]
     
+    static let sharedInstance: WeatherModel = {
+        let instance = WeatherModel()
+        return instance
+    }()
     
     
     init() {
         currentLocation = getCurrentLocation()
-        updateCurrentForecast()
-        updateCurrentForecastForADay()
-        updateHomeForecastForADay()
-        updateHomeForecast()
     }
     
-    func getCurrentLocation() -> (longtitude: Double, latitude: Double)?{
+   private func getCurrentLocation() -> (longtitude: Double, latitude: Double)?{
         //Get device location
         return (-122.431297,37.773972) //SF coord
     }
     
-    
+
     func getForecast(for location: (longtitude: Double, latitude: Double),
                      completion:@escaping (_ forecast: Forecast?) -> Void){
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather",
@@ -131,45 +131,6 @@ class WeatherModel{
                                               eveTemperature: newEveTemperature,
                                               nightTemperature: newNightTemperature)
                 completion(newDayForecast)
-
         }
     }
-    
-    
-    func updateCurrentForecast(){
-        if let location = currentLocation{
-            getForecast(for: location, completion: {
-                self.currentForecast = $0
-                NotificationCenter.default.post(name: Notification.Name(rawValue: currentWeatherNotificationKey), object: self)
-            })
-        }
-    }
-    
-    func updateCurrentForecastForADay(){
-        if let location = currentLocation{
-            getForecastForADay(for: location, completion: {
-                self.currentDayForecast = $0
-                NotificationCenter.default.post(name: Notification.Name(rawValue: currentDailyWeatherNotificationKey), object: self)
-            })
-        }
-    }
-    
-    func updateHomeForecast(){
-        if let location = homeLocation{
-            getForecast(for: location, completion: {
-                self.homeForecast = $0
-                NotificationCenter.default.post(name: Notification.Name(rawValue: homeWeatherNotificationKey), object: self)
-            })
-        }
-    }
-    
-    func updateHomeForecastForADay(){
-        if let location = homeLocation{
-            getForecastForADay(for: location, completion: {
-                self.homeDayForecast = $0
-                NotificationCenter.default.post(name: Notification.Name(rawValue: homeDailyWeatherNotificationKey), object: self)
-            })
-        }
-    }
-
 }

@@ -23,6 +23,7 @@ class HomePlaceViewController: UIViewController {
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var minTemperatureLabel: UILabel!
     @IBOutlet weak var homeTownNameLabel: UILabel!
+    
     var dataModel: WeatherModel!
     
     //update UI when Forecast is updated
@@ -44,8 +45,10 @@ class HomePlaceViewController: UIViewController {
     }
     
     func updateForecast(){
-        dataModel.updateHomeForecast()
-        dataModel.updateHomeForecastForADay()
+        dataModel.getForecast(for: dataModel.homeLocation!,
+                              completion: {self.homeForecast = $0})
+        dataModel.getForecastForADay(for: dataModel.homeLocation!,
+                                     completion: {self.homeDailyForecast = $0})
     }
     
     
@@ -96,32 +99,10 @@ class HomePlaceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(HomePlaceViewController.heardNotification),
-                                               name: NSNotification.Name(rawValue: homeWeatherNotificationKey),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(HomePlaceViewController.heardDailyNotification),
-                                               name: NSNotification.Name(rawValue: homeDailyWeatherNotificationKey),
-                                               object: nil)
-
+        self.dataModel = WeatherModel.sharedInstance
+        dataModel.getForecast(for: dataModel.homeLocation!, completion: {self.homeForecast = $0})
+        dataModel.getForecastForADay(for: dataModel.homeLocation!, completion: {self.homeDailyForecast = $0})
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateForecast()
-    }
-    
-    
-    func heardNotification(){
-        self.homeForecast = dataModel.homeForecast
-    }
-    
-    func heardDailyNotification(){
-        self.homeDailyForecast = dataModel.homeDayForecast
     }
     
 

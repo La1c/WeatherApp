@@ -26,7 +26,7 @@ class CurrentPlaceViewController: UIViewController {
     @IBOutlet weak var maxTemperatureLable: UILabel!
     
     var dataModel: WeatherModel!
-    
+
     //update UI when Forecast is updated
     var currentForecast:Forecast?{
         didSet{
@@ -45,31 +45,16 @@ class CurrentPlaceViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dataModel = WeatherModel.sharedInstance
+        dataModel.getForecast(for: dataModel.currentLocation!, completion: {self.currentForecast = $0})
+        dataModel.getForecastForADay(for: dataModel.currentLocation!, completion: {self.currentDailyForecast = $0})
         
-        //Listening for changes in the model
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(CurrentPlaceViewController.heardNotification),
-                                               name: NSNotification.Name(rawValue: currentWeatherNotificationKey),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(CurrentPlaceViewController.heardDailyNotification),
-                                               name: NSNotification.Name(rawValue: currentDailyWeatherNotificationKey),
-                                               object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    //update Forecast when recieved new data
-    func heardNotification(){
-        self.currentForecast = dataModel.currentForecast
-    }
-    
-    func heardDailyNotification(){
-        self.currentDailyForecast = dataModel.currentDayForecast
-    }
     
     
     func updateUI(){
@@ -118,8 +103,10 @@ class CurrentPlaceViewController: UIViewController {
     }
     
     func updateForecast(){
-        dataModel.updateCurrentForecast()
-        dataModel.updateCurrentForecastForADay()
+        dataModel.getForecast(for: dataModel.currentLocation!,
+                              completion: {self.currentForecast = $0})
+        dataModel.getForecastForADay(for: dataModel.currentLocation!,
+                                     completion: {self.currentDailyForecast = $0})
     }
 }
 
