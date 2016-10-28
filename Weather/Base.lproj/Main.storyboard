@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fa-d6-qUj">
@@ -48,6 +48,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kf-vD-b7d">
                                 <state key="normal" image="gear"/>
+                                <connections>
+                                    <segue destination="P45-yt-Jkz" kind="presentation" identifier="ShowSettings" modalPresentationStyle="overFullScreen" id="Hna-8e-ngW"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updated: Just Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzS-7W-4hh">
                                 <constraints>
@@ -273,6 +276,67 @@
             </objects>
             <point key="canvasLocation" x="715.94202898550725" y="-3.2608695652173916"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="4lH-Qo-xLc">
+            <objects>
+                <viewController id="P45-yt-Jkz" customClass="SettingsViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IgI-QM-oLP"/>
+                        <viewControllerLayoutGuide type="bottom" id="RdQ-pC-FHY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i2g-ur-FLB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyf-Co-qBb">
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="P45-yt-Jkz" eventType="touchUpInside" id="tc7-U8-os9"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nnl-ER-n0O"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geolocation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svY-x3-ha5">
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGT-Rw-47F">
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Town" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ns-m5-Lxe">
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saint-Petersburg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFn-4Z-48z">
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XGT-Rw-47F" firstAttribute="top" secondItem="IgI-QM-oLP" secondAttribute="bottom" id="0v4-rD-OEZ"/>
+                            <constraint firstItem="5ns-m5-Lxe" firstAttribute="leading" secondItem="svY-x3-ha5" secondAttribute="leading" id="29G-Xn-bQi"/>
+                            <constraint firstItem="nFn-4Z-48z" firstAttribute="trailing" secondItem="Nnl-ER-n0O" secondAttribute="trailing" id="3PI-cc-yIO"/>
+                            <constraint firstItem="Nnl-ER-n0O" firstAttribute="trailing" secondItem="i2g-ur-FLB" secondAttribute="trailingMargin" id="635-JX-eGH"/>
+                            <constraint firstItem="5ns-m5-Lxe" firstAttribute="top" secondItem="svY-x3-ha5" secondAttribute="bottom" constant="30" id="TNU-C5-jLr"/>
+                            <constraint firstItem="Xyf-Co-qBb" firstAttribute="centerX" secondItem="i2g-ur-FLB" secondAttribute="centerX" id="WMV-kE-jct"/>
+                            <constraint firstItem="svY-x3-ha5" firstAttribute="centerY" secondItem="Nnl-ER-n0O" secondAttribute="centerY" id="egt-6z-beK"/>
+                            <constraint firstItem="RdQ-pC-FHY" firstAttribute="top" secondItem="Xyf-Co-qBb" secondAttribute="bottom" constant="20" id="gFo-a3-m0C"/>
+                            <constraint firstItem="nFn-4Z-48z" firstAttribute="centerY" secondItem="5ns-m5-Lxe" secondAttribute="centerY" id="jmU-4W-TjF"/>
+                            <constraint firstItem="XGT-Rw-47F" firstAttribute="centerX" secondItem="i2g-ur-FLB" secondAttribute="centerX" id="kDM-d8-pJW"/>
+                            <constraint firstItem="svY-x3-ha5" firstAttribute="leading" secondItem="i2g-ur-FLB" secondAttribute="leadingMargin" id="luT-mV-jTH"/>
+                            <constraint firstItem="Nnl-ER-n0O" firstAttribute="top" secondItem="XGT-Rw-47F" secondAttribute="bottom" constant="30" id="tHq-ER-4Y4"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Moz-Ah-97r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1085.625" y="744.71830985915494"/>
+        </scene>
         <!--Home-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -282,7 +346,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Town" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHi-CY-rh3">
@@ -310,6 +374,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iI3-OM-xsk">
                                 <state key="normal" image="gear"/>
+                                <connections>
+                                    <segue destination="P45-yt-Jkz" kind="presentation" identifier="ShowSettings" modalPresentationStyle="overFullScreen" id="GL7-DY-fjA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+19˚C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FRi-x6-ziu">
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
@@ -564,4 +631,7 @@
         <image name="house" width="24" height="24"/>
         <image name="pin" width="20" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GL7-DY-fjA"/>
+    </inferredMetricsTieBreakers>
 </document>

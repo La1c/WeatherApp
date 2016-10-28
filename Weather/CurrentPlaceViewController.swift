@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
+class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, SettingDelegate {
     
     @IBOutlet weak var morningTemperatureLabel: UILabel!
     @IBOutlet weak var eveningTemperatureLabel: UILabel!
@@ -71,6 +71,12 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowSettings"{
+            let vc = segue.destination as! SettingsViewController
+            vc.backDelegate = self
+        }
+    }
     
     
     func updateUI(){
@@ -128,6 +134,10 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
     
     func updateForecast(){
         dataModel.updateCurrentLocation()
+    }
+    
+    func userFinishedChangingSettings() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
