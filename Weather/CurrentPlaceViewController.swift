@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CurrentPlaceViewController: UIViewController {
     
@@ -46,6 +47,19 @@ class CurrentPlaceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataModel = WeatherModel.sharedInstance
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            dataModel.locationManager?.requestWhenInUseAuthorization()
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+                dataModel.updateCurrentLocation()
+            }
+        case .authorizedWhenInUse:
+            print("Permission granted")
+            dataModel.updateCurrentLocation()
+        default:
+            print("No permission")
+        }
         dataModel.getForecast(for: dataModel.currentLocation!, completion: {self.currentForecast = $0})
         dataModel.getForecastForADay(for: dataModel.currentLocation!, completion: {self.currentDailyForecast = $0})
         
@@ -103,6 +117,7 @@ class CurrentPlaceViewController: UIViewController {
     }
     
     func updateForecast(){
+        dataModel.updateCurrentLocation()
         dataModel.getForecast(for: dataModel.currentLocation!,
                               completion: {self.currentForecast = $0})
         dataModel.getForecastForADay(for: dataModel.currentLocation!,
