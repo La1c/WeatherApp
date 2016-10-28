@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CurrentPlaceViewController: UIViewController {
+class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
     
     @IBOutlet weak var morningTemperatureLabel: UILabel!
     @IBOutlet weak var eveningTemperatureLabel: UILabel!
@@ -25,6 +25,10 @@ class CurrentPlaceViewController: UIViewController {
     @IBOutlet weak var minTemperatureLabel: UILabel!
     @IBOutlet weak var currentTrafficLevelLabel: UILabel!
     @IBOutlet weak var maxTemperatureLable: UILabel!
+    @IBOutlet weak var updateButton: UIButton!
+    
+    var isRotating = false
+    var shouldStopRotating = false
     
     var dataModel: WeatherModel!
 
@@ -42,12 +46,13 @@ class CurrentPlaceViewController: UIViewController {
     }
 
     @IBAction func updateButtonPressed(_ sender: UIButton) {
+        updateButton.startRotating()
         updateForecast()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataModel = WeatherModel.sharedInstance
-        
+        dataModel = WeatherModel.sharedInstance
+        dataModel.delegate = self
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
             dataModel.locationManager?.requestWhenInUseAuthorization()
@@ -60,9 +65,6 @@ class CurrentPlaceViewController: UIViewController {
         default:
             print("No permission")
         }
-        dataModel.getForecast(for: dataModel.currentLocation!, completion: {self.currentForecast = $0})
-        dataModel.getForecastForADay(for: dataModel.currentLocation!, completion: {self.currentDailyForecast = $0})
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,12 +118,16 @@ class CurrentPlaceViewController: UIViewController {
         }
     }
     
+    func weatherModelDidUpdate(location: (longtitude: Double, latitude: Double)) {
+        dataModel.getForecast(for: location,
+                              completion: {self.currentForecast = $0})
+        dataModel.getForecastForADay(for: location,
+                                     completion: {self.currentDailyForecast = $0})
+        self.updateButton.stopRotating()
+    }
+    
     func updateForecast(){
         dataModel.updateCurrentLocation()
-        dataModel.getForecast(for: dataModel.currentLocation!,
-                              completion: {self.currentForecast = $0})
-        dataModel.getForecastForADay(for: dataModel.currentLocation!,
-                                     completion: {self.currentDailyForecast = $0})
     }
 }
 
@@ -136,6 +142,28 @@ extension CurrentPlaceViewController{
             return dateFormatter.string(from: Date(timeIntervalSince1970: time))
         }
         return nil
+    }
+}
+
+// MARK: Animation
+extension UIView {
+    func startRotating(duration: Double = 1) {
+        let kAnimationKey = "rotation"
+        if self.layer.animation(forKey: kAnimationKey) == nil {
+            let animate = CABasicAnimation(keyPath: "transform.rotation")
+            animate.duration = duration
+            animate.repeatCount = Float.infinity
+            animate.fromValue = 0.0
+            animate.toValue = Float(-M_PI * 2.0)
+            self.layer.add(animate, forKey: kAnimationKey)
+        }
+    }
+    func stopRotating() {
+        let kAnimationKey = "rotation"
+        
+        if self.layer.animation(forKey: kAnimationKey) != nil {
+            self.layer.removeAnimation(forKey: kAnimationKey)
+        }
     }
 }
 

@@ -18,6 +18,11 @@ let currentDailyWeatherNotificationKey = "currentWeatherForDayKey"
 let homeDailyWeatherNotificationKey = "homeWeatherForDayKey"
 let homeWeatherNotificationKey = "homeWeatherKey"
 
+
+protocol WeatherModelDelegate: class{
+    func weatherModelDidUpdate(location: (longtitude: Double, latitude: Double))
+}
+
 class WeatherModel: NSObject, CLLocationManagerDelegate{
     
     var currentForecast:Forecast?
@@ -28,6 +33,8 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
     var homeLocation:(longtitude: Double, latitude: Double)? = (30.315785, 59.939039) //SPb coord
     let keys = WeatherKeys()
     var locationManager: CLLocationManager?
+    
+    weak var delegate: WeatherModelDelegate?
     
     let picsDictionary: [String:UIImage] = [
         "01d":#imageLiteral(resourceName: "Sunny"),
@@ -61,25 +68,12 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
         super.init()
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        currentLocation = getCurrentLocation() 
+        updateCurrentLocation()
     }
     
-    func getCurrentLocation() -> (longtitude:Double, latitude:Double)?{
-        locationManager?.requestLocation()
-        //Get device location
-        //
-        if let recentLocation = locationManager?.location?.coordinate{
-            return (recentLocation.longitude, recentLocation.latitude)
-        }
-        return (-122.431297,37.773972) //SF coord
-    }
     
     func updateCurrentLocation(){
         self.locationManager?.requestLocation()
-        if let recentLocation = self.locationManager?.location?.coordinate{
-            self.currentLocation = (recentLocation.longitude, recentLocation.latitude)
-        }
-
     }
     
 
@@ -155,8 +149,8 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
     
      func locationManager(_ location: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = (locations[0].coordinate.longitude, locations[0].coordinate.latitude)
-        print("locations = \(locations)")
+        self.currentLocation = (locations[locations.count - 1].coordinate.longitude, locations[locations.count - 1].coordinate.latitude)
+        delegate?.weatherModelDidUpdate(location: self.currentLocation!)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
