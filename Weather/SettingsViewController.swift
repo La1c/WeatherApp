@@ -21,7 +21,11 @@ class SettingsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.frame
+        
+        self.view.insertSubview(blurEffectView, at: 0)
         // Do any additional setup after loading the view.
     }
 
