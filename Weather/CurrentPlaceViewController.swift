@@ -26,9 +26,7 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
     @IBOutlet weak var currentTrafficLevelLabel: UILabel!
     @IBOutlet weak var maxTemperatureLable: UILabel!
     @IBOutlet weak var updateButton: UIButton!
-    
-    var isRotating = false
-    var shouldStopRotating = false
+
     
     var dataModel: WeatherModel!
 
@@ -127,8 +125,8 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
     func weatherModelDidUpdate(location: (longtitude: Double, latitude: Double)) {
         dataModel.getForecast(for: location,
                               completion: {self.currentForecast = $0})
-        dataModel.getForecastForADay(for: location,
-                                     completion: {self.currentDailyForecast = $0})
+        dataModel.getForecastForDays(for: location,
+                                     completion: {self.currentDailyForecast = $0[0]})
         self.updateButton.stopRotating()
     }
     
@@ -141,7 +139,7 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
     }
 }
 
-// MARK: Format Data
+// MARK: - Format Data
 extension CurrentPlaceViewController{
     func formatDate(from utc: Double?) -> String? {
         let dateFormatter = DateFormatter()
@@ -155,7 +153,7 @@ extension CurrentPlaceViewController{
     }
 }
 
-// MARK: Animation
+// MARK: - Animation
 extension UIView {
     func startRotating(duration: Double = 1) {
         let kAnimationKey = "rotation"

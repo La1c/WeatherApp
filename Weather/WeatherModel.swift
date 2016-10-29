@@ -119,31 +119,49 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
         }
     }
     
-    func getForecastForADay(for location: (longtitude: Double, latitude: Double),
-                            completion:@escaping (_ forecast: Forecast?) -> Void){
+    func getForecastForDays(for location: (longtitude: Double, latitude: Double),
+                            cnt: Int = 1,
+                            completion:@escaping (_ forecast: [Forecast?]) -> Void){
         Alamofire.request("http://api.openweathermap.org/data/2.5/forecast/daily",
                           parameters: ["lat":location.latitude,
                                        "lon": location.longtitude,
                                        "APPID": keys.openWeatherAPIKey()!,
                                        "units":"metric",
-                                       "cnt":1])
+                                       "cnt":cnt])
             .responseJSON{response in
                 guard response.result.isSuccess else{
                     print(response.result.error)
                     return
                 }
                 
+                var newForecastForDays = [Forecast?]()
                 let json = JSON(response.result.value!)
-                let newMorningTemperature = json["list"].arrayValue[0]["temp"]["morn"].double
-                let newDayTemperature = json["list"].arrayValue[0]["temp"]["day"].double
-                let newEveTemperature = json["list"].arrayValue[0]["temp"]["eve"].double
-                let newNightTemperature = json["list"].arrayValue[0]["temp"]["night"].double
+                let days = json["list"].arrayValue
+                for day in days{
+                    let newImageName = day["weather"]["icon"].stringValue
+                    let newWeatherName = day["weather"]["main"].stringValue
+                    let newMorningTemperature = day["temp"]["morn"].double
+                    let newDayTemperature = day["temp"]["day"].double
+                    let newEveTemperature = day["temp"]["eve"].double
+                    let newNightTemperature = day["temp"]["night"].double
+                    let newMaxTemperature = day["temp"]["max"].double
+                    let newMinTemperature = day["temp"]["min"].double
+                    
+                    let newDayForecast = Forecast(maxTemperature: newMaxTemperature,
+                                                  minTemperature: newMinTemperature,
+                                                  morningTemperature: newMorningTemperature,
+                                                  dayTemperature: newDayTemperature,
+                                                  eveTemperature: newEveTemperature,
+                                                  nightTemperature: newNightTemperature,
+                                                  imageName: newImageName,
+                                                  weatherName: newWeatherName)
+                    newForecastForDays.append(newDayForecast)
+                }
 
-                let newDayForecast = Forecast(morningTemperature: newMorningTemperature,
-                                              dayTemperature: newDayTemperature,
-                                              eveTemperature: newEveTemperature,
-                                              nightTemperature: newNightTemperature)
-                completion(newDayForecast)
+
+               
+                print(json)
+                completion(newForecastForDays)
         }
     }
     

@@ -8,14 +8,11 @@
 
 import UIKit
 
-class HomePlaceViewController: UIViewController {
+class HomePlaceViewController: UIViewController, SettingDelegate {
 
+    @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var homeWeatherNameLabel: UILabel!
-    @IBOutlet weak var eveningTemperatureLabel: UILabel!
     @IBOutlet weak var updateStatusLabel: UILabel!
-    @IBOutlet weak var nightTemperatureLabel: UILabel!
-    @IBOutlet weak var dayTemperatureLabel: UILabel!
-    @IBOutlet weak var morningTemperatureLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var maxTemperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
@@ -33,7 +30,7 @@ class HomePlaceViewController: UIViewController {
         }
     }
     
-    var homeDailyForecast:Forecast?{
+    var homeDailyForecast:[Forecast?] = []{
         didSet{
             updateDailyUI()
         }
@@ -41,19 +38,20 @@ class HomePlaceViewController: UIViewController {
 
     
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
+         updateButton.startRotating()
          updateForecast()
     }
     
     func updateForecast(){
         dataModel.getForecast(for: dataModel.homeLocation!,
                               completion: {self.homeForecast = $0})
-        dataModel.getForecastForADay(for: dataModel.homeLocation!,
+      dataModel.getForecastForDays(for: dataModel.homeLocation!,
                                      completion: {self.homeDailyForecast = $0})
     }
     
     
     func updateDailyUI(){
-        if let dayTemp = homeDailyForecast?.dayTemperature{
+  /*      if let dayTemp = homeDailyForecast?.dayTemperature{
             dayTemperatureLabel.text =  "\(dayTemp > 0 ? "+" : "")\(round(dayTemp))˚"
         }
         
@@ -68,6 +66,7 @@ class HomePlaceViewController: UIViewController {
         if let nightTemp = homeDailyForecast?.nightTemperature{
             nightTemperatureLabel.text =  "\(nightTemp > 0 ? "+" : "")\(round(nightTemp))˚"
         }
+ */
     }
     
     func updateUI(){
@@ -101,10 +100,13 @@ class HomePlaceViewController: UIViewController {
         super.viewDidLoad()
         self.dataModel = WeatherModel.sharedInstance
         dataModel.getForecast(for: dataModel.homeLocation!, completion: {self.homeForecast = $0})
-        dataModel.getForecastForADay(for: dataModel.homeLocation!, completion: {self.homeDailyForecast = $0})
+        dataModel.getForecastForDays(for: dataModel.homeLocation!, cnt: 5, completion: {self.homeDailyForecast = $0})
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    func userFinishedChangingSettings() {
+        dismiss(animated: true, completion: nil)
+    }
 
 
     override func didReceiveMemoryWarning() {
