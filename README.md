@@ -15,4 +15,6 @@ TO-DO:
   
 Screenshots:
 
-![currentCity](/../master/screenshot1.png?raw=true "Optional Title")
+![currentCity](/../master/screenshot1.png =320x568)
+![homeCity](/../master/screenshot2.png =320x568)
+![settingsCity](/../master/screenshot3.png =320x568)
