@@ -138,14 +138,15 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                 let json = JSON(response.result.value!)
                 let days = json["list"].arrayValue
                 for day in days{
-                    let newImageName = day["weather"]["icon"].stringValue
-                    let newWeatherName = day["weather"]["main"].stringValue
+                    let newImageName = day["weather"].arrayValue[0]["icon"].stringValue
+                    let newWeatherName = day["weather"].arrayValue[0]["main"].stringValue
                     let newMorningTemperature = day["temp"]["morn"].double
                     let newDayTemperature = day["temp"]["day"].double
                     let newEveTemperature = day["temp"]["eve"].double
                     let newNightTemperature = day["temp"]["night"].double
                     let newMaxTemperature = day["temp"]["max"].double
                     let newMinTemperature = day["temp"]["min"].double
+                    let newTimestamp = day["dt"].doubleValue
                     
                     let newDayForecast = Forecast(maxTemperature: newMaxTemperature,
                                                   minTemperature: newMinTemperature,
@@ -153,6 +154,7 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                                                   dayTemperature: newDayTemperature,
                                                   eveTemperature: newEveTemperature,
                                                   nightTemperature: newNightTemperature,
+                                                  timestamp: newTimestamp,
                                                   imageName: newImageName,
                                                   weatherName: newWeatherName)
                     newForecastForDays.append(newDayForecast)
