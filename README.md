@@ -15,6 +15,6 @@ TO-DO:
   
 Screenshots:
 
-![currentCity](/../master/screenshot1.png =320x568)
-![homeCity](/../master/screenshot2.png =320x568)
-![settingsCity](/../master/screenshot3.png =320x568)
+![currentCity](/../master/screenshot1.png?=160x284)
+![homeCity](/../master/screenshot2.png?=160x284)
+![settingsCity](/../master/screenshot3.png?=160x284)
