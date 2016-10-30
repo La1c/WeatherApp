@@ -68,6 +68,11 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
         updateCurrentLocation()
     }
     
+    func updateHomeLocation(newCoord: (longtitude: Double, latitude: Double)?){
+        if let newLocation = newCoord{
+            homeLocation = newLocation
+        }
+    }
     
     func updateCurrentLocation(){
         self.locationManager?.requestLocation()

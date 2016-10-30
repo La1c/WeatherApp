@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, SettingDelegate {
+class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
     
     @IBOutlet weak var morningTemperatureLabel: UILabel!
     @IBOutlet weak var eveningTemperatureLabel: UILabel!
@@ -66,6 +66,7 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
     }
     
     func requestPermissonForLocationService(){
+        
         let alertController = UIAlertController(
             title: "Foreground Location Access Disabled",
             message: "In order to be able to get actual forecast at your location, please open this app's settings and set location access to 'While Using the App'.",
@@ -138,13 +139,9 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
     func updateForecast(){
         dataModel.updateCurrentLocation()
     }
-    
-    func userFinishedChangingSettings() {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
-// MARK: - Format Data
+// MARK: - Format Date
 extension CurrentPlaceViewController{
     func formatDate(from utc: Double?) -> String? {
         let dateFormatter = DateFormatter()
@@ -177,6 +174,13 @@ extension UIView {
         if self.layer.animation(forKey: kAnimationKey) != nil {
             self.layer.removeAnimation(forKey: kAnimationKey)
         }
+    }
+}
+
+extension CurrentPlaceViewController : SettingDelegate{
+    func userFinishedChangingSettings(coordinates: (longtitude: Double, latitude: Double)?, geolocationAuthed: Bool?) {
+        dataModel.updateHomeLocation(newCoord: coordinates)
+        dismiss(animated: true, completion: nil)
     }
 }
 

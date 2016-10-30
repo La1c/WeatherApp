@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePlaceViewController: UIViewController, SettingDelegate {
+class HomePlaceViewController: UIViewController {
 
     @IBOutlet weak var day5MaxLabel: UILabel!
     @IBOutlet weak var day4MaxLabel: UILabel!
@@ -175,6 +175,14 @@ extension HomePlaceViewController{
             return dateFormatter.string(from: Date(timeIntervalSince1970: time))
         }
         return nil
+    }
+}
+
+extension HomePlaceViewController : SettingDelegate{
+    func userFinishedChangingSettings(coordinates: (longtitude: Double, latitude: Double)?, geolocationAuthed: Bool?) {
+        dataModel.updateHomeLocation(newCoord: coordinates)
+        updateForecast()
+        dismiss(animated: true, completion: nil)
     }
 }
 
