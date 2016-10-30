@@ -13,14 +13,11 @@ import UIKit
 import Keys
 import CoreLocation
 
-let currentWeatherNotificationKey = "currentWeatherKey"
-let currentDailyWeatherNotificationKey = "currentWeatherForDayKey"
-let homeDailyWeatherNotificationKey = "homeWeatherForDayKey"
-let homeWeatherNotificationKey = "homeWeatherKey"
 
 
 protocol WeatherModelDelegate: class{
     func weatherModelDidUpdate(location: (longtitude: Double, latitude: Double))
+    func requestPermissonForLocationService()
 }
 
 class WeatherModel: NSObject, CLLocationManagerDelegate{
@@ -86,7 +83,6 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                          "units":"metric"])
             .responseJSON{response in
             guard response.result.isSuccess else{
-                print(response.result.error)
                 completion(nil)
                 return
             }
@@ -130,7 +126,6 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                                        "cnt":cnt])
             .responseJSON{response in
                 guard response.result.isSuccess else{
-                    print(response.result.error)
                     return
                 }
                 
@@ -159,10 +154,6 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                                                   weatherName: newWeatherName)
                     newForecastForDays.append(newDayForecast)
                 }
-
-
-               
-                print(json)
                 completion(newForecastForDays)
         }
     }
@@ -171,6 +162,17 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
                          didUpdateLocations locations: [CLLocation]) {
         self.currentLocation = (locations[locations.count - 1].coordinate.longitude, locations[locations.count - 1].coordinate.latitude)
         delegate?.weatherModelDidUpdate(location: self.currentLocation!)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager?.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            updateCurrentLocation()
+        default:
+            delegate?.requestPermissonForLocationService()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -51,19 +51,8 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
         super.viewDidLoad()
         dataModel = WeatherModel.sharedInstance
         dataModel.delegate = self
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            dataModel.locationManager?.requestWhenInUseAuthorization()
-            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
-                dataModel.updateCurrentLocation()
-            }
-        case .authorizedWhenInUse:
-            print("Permission granted")
-            dataModel.updateCurrentLocation()
-        default:
-            print("No permission")
-        }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,6 +65,22 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate, Settin
         }
     }
     
+    func requestPermissonForLocationService(){
+        let alertController = UIAlertController(
+            title: "Foreground Location Access Disabled",
+            message: "In order to be able to get actual forecast at your location, please open this app's settings and set location access to 'While Using the App'.",
+            preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString){
+                UIApplication.shared.openURL(url)
+            }
+        }
+        alertController.addAction(openAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func updateUI(){
         currentCityNameLabel.text = currentForecast?.cityName
