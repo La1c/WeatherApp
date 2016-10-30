@@ -11,13 +11,13 @@ In current version:
 TO-DO:
   * Implement background which changes due to weather/time of day
   * Fix bugs, make code better
-  * Implement city search in settings
   * Implement user geolocation control in settings
+  * Save user home city location somehow
   
   
 Screenshots:
 
-![currentCity](/../master/screenshot1.png? =160x284)
-![homeCity](/../master/screenshot2.png? =160x284)
-![settingsCity](/../master/screenshot3.png? =160x284)
-![search](/../master/screenshot4.png? =160x284)
+<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot1.png?raw=true" width="320">
+<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot2.png?raw=true" width="320">
+<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot3.png?raw=true" width="320">
+<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot4.png?raw=true" width="320">
