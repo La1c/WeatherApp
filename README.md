@@ -6,11 +6,13 @@ Simple weather app.
 
 In current version:
  * Shows current temperature, city name and forecast for a day
+ * Home screen shows forecast for 5 days ahead
  
 TO-DO:
-  * Complete second screen
   * Implement background which changes due to weather/time of day
   * Fix bugs, make code better
+  * Implement city search in settings
+  * Implement user geolocation control in settings
   
   
 Screenshots:
