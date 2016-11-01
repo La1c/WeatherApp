@@ -63,9 +63,9 @@ class HomePlaceViewController: UIViewController {
     }
     
     func updateForecast(){
-        dataModel.getForecast(for: dataModel.homeLocation!,
+        dataModel.getForecast(for: dataModel.homeLocation,
                               completion: {self.homeForecast = $0})
-        dataModel.getForecastForDays(for: dataModel.homeLocation!,
+        dataModel.getForecastForDays(for: dataModel.homeLocation,
                                      cnt: 5,
                                      completion: {self.homeDailyForecast = $0})
     }
@@ -136,15 +136,10 @@ class HomePlaceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataModel = WeatherModel.sharedInstance
-        dataModel.getForecast(for: dataModel.homeLocation!, completion: {self.homeForecast = $0})
-        dataModel.getForecastForDays(for: dataModel.homeLocation!, cnt: 5, completion: {self.homeDailyForecast = $0})
+        dataModel.getForecast(for: dataModel.homeLocation, completion: {self.homeForecast = $0})
+        dataModel.getForecastForDays(for: dataModel.homeLocation, cnt: 5, completion: {self.homeDailyForecast = $0})
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    func userFinishedChangingSettings() {
-        dismiss(animated: true, completion: nil)
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -179,8 +174,8 @@ extension HomePlaceViewController{
 }
 
 extension HomePlaceViewController : SettingDelegate{
-    func userFinishedChangingSettings(coordinates: (longtitude: Double, latitude: Double)?, geolocationAuthed: Bool?) {
-        dataModel.updateHomeLocation(newCoord: coordinates)
+    func userFinishedChangingSettings(){
+       // dataModel.updateHomeLocation(newCoord: coordinates)
         updateForecast()
         dismiss(animated: true, completion: nil)
     }

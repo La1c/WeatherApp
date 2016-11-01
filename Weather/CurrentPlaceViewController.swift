@@ -76,7 +76,7 @@ class CurrentPlaceViewController: UIViewController, WeatherModelDelegate {
         
         let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
             if let url = URL(string: UIApplicationOpenSettingsURLString){
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.openURL (url)
             }
         }
         alertController.addAction(openAction)
@@ -178,8 +178,8 @@ extension UIView {
 }
 
 extension CurrentPlaceViewController : SettingDelegate{
-    func userFinishedChangingSettings(coordinates: (longtitude: Double, latitude: Double)?, geolocationAuthed: Bool?) {
-        dataModel.updateHomeLocation(newCoord: coordinates)
+    func userFinishedChangingSettings() {
+       // dataModel.updateHomeLocation(newCoord: coordinates)
         dismiss(animated: true, completion: nil)
     }
 }

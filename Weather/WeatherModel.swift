@@ -27,7 +27,16 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
     var homeForecast:Forecast?
     var homeDayForecast: Forecast?
     var currentLocation:(longtitude: Double, latitude: Double)?
-    var homeLocation:(longtitude: Double, latitude: Double)? = (30.315785, 59.939039) //SPb coord
+    var homeLocation:(longtitude: Double, latitude: Double){
+        get {
+            if let lon = UserDefaults.standard.object(forKey: "Town Location Longtitude") as? Double,
+                let lat = UserDefaults.standard.object(forKey: "Town Location Latitude") as? Double{
+                return (lon, lat)
+            } else {
+                return (30.315785, 59.939039)
+            }
+        }
+    }
     let keys = WeatherKeys()
     var locationManager: CLLocationManager?
     
@@ -68,11 +77,11 @@ class WeatherModel: NSObject, CLLocationManagerDelegate{
         updateCurrentLocation()
     }
     
-    func updateHomeLocation(newCoord: (longtitude: Double, latitude: Double)?){
-        if let newLocation = newCoord{
-            homeLocation = newLocation
-        }
-    }
+//    func updateHomeLocation(newCoord: (longtitude: Double, latitude: Double)?){
+//        if let newLocation = newCoord{
+//            homeLocation = newLocation
+//        }
+//    }
     
     func updateCurrentLocation(){
         self.locationManager?.requestLocation()

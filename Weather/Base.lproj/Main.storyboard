@@ -348,9 +348,6 @@
                                     <action selector="backButtonPressed:" destination="P45-yt-Jkz" eventType="touchUpInside" id="tc7-U8-os9"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nnl-ER-n0O">
-                                <rect key="frame" x="255" y="98" width="51" height="31"/>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geolocation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svY-x3-ha5">
                                 <rect key="frame" x="16" y="102" width="106" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
@@ -370,8 +367,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0w-0f-Xzb">
-                                <rect key="frame" x="152" y="150" width="152" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="155" y="150" width="149" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <state key="normal" title="Saint-Petersburg">
                                     <color key="titleColor" red="0.11372549019607843" green="0.41960784313725491" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -379,22 +376,30 @@
                                     <segue destination="oeR-r6-ICe" kind="presentation" identifier="ShowSearch" modalTransitionStyle="flipHorizontal" id="axO-Qb-4O4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y84-PJ-DwA">
+                                <rect key="frame" x="164" y="96" width="140" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <state key="normal" title="Manage Privacy"/>
+                                <connections>
+                                    <action selector="privacyManagementButtonPressed:" destination="P45-yt-Jkz" eventType="touchUpInside" id="KUD-0U-EjD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XGT-Rw-47F" firstAttribute="top" secondItem="IgI-QM-oLP" secondAttribute="bottom" id="0v4-rD-OEZ"/>
                             <constraint firstItem="5ns-m5-Lxe" firstAttribute="leading" secondItem="svY-x3-ha5" secondAttribute="leading" id="29G-Xn-bQi"/>
-                            <constraint firstItem="Nnl-ER-n0O" firstAttribute="trailing" secondItem="i2g-ur-FLB" secondAttribute="trailingMargin" id="635-JX-eGH"/>
                             <constraint firstItem="d0w-0f-Xzb" firstAttribute="centerY" secondItem="5ns-m5-Lxe" secondAttribute="centerY" id="6Fr-Yh-clW"/>
+                            <constraint firstItem="svY-x3-ha5" firstAttribute="centerY" secondItem="y84-PJ-DwA" secondAttribute="centerY" id="FOU-uQ-Rsl"/>
                             <constraint firstItem="5ns-m5-Lxe" firstAttribute="top" secondItem="svY-x3-ha5" secondAttribute="bottom" constant="30" id="TNU-C5-jLr"/>
-                            <constraint firstItem="d0w-0f-Xzb" firstAttribute="trailing" secondItem="Nnl-ER-n0O" secondAttribute="trailing" id="Vry-lM-d4r"/>
                             <constraint firstItem="Xyf-Co-qBb" firstAttribute="centerX" secondItem="i2g-ur-FLB" secondAttribute="centerX" id="WMV-kE-jct"/>
-                            <constraint firstItem="svY-x3-ha5" firstAttribute="centerY" secondItem="Nnl-ER-n0O" secondAttribute="centerY" id="egt-6z-beK"/>
+                            <constraint firstItem="y84-PJ-DwA" firstAttribute="trailing" secondItem="i2g-ur-FLB" secondAttribute="trailingMargin" id="Zr7-Zx-5y9"/>
+                            <constraint firstItem="d0w-0f-Xzb" firstAttribute="trailing" secondItem="y84-PJ-DwA" secondAttribute="trailing" id="ZtK-dP-fcG"/>
+                            <constraint firstItem="y84-PJ-DwA" firstAttribute="top" secondItem="XGT-Rw-47F" secondAttribute="bottom" constant="28" id="ZuG-p1-gsS"/>
                             <constraint firstItem="RdQ-pC-FHY" firstAttribute="top" secondItem="Xyf-Co-qBb" secondAttribute="bottom" constant="20" id="gFo-a3-m0C"/>
                             <constraint firstItem="XGT-Rw-47F" firstAttribute="centerX" secondItem="i2g-ur-FLB" secondAttribute="centerX" id="kDM-d8-pJW"/>
                             <constraint firstItem="svY-x3-ha5" firstAttribute="leading" secondItem="i2g-ur-FLB" secondAttribute="leadingMargin" id="luT-mV-jTH"/>
                             <constraint firstItem="d0w-0f-Xzb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5ns-m5-Lxe" secondAttribute="trailing" constant="8" id="mxg-Sb-Gtp"/>
-                            <constraint firstItem="Nnl-ER-n0O" firstAttribute="top" secondItem="XGT-Rw-47F" secondAttribute="bottom" constant="30" id="tHq-ER-4Y4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -403,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Moz-Ah-97r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085.5999999999999" y="744.3778110944528"/>
+            <point key="canvasLocation" x="1083.75" y="743.66197183098598"/>
         </scene>
         <!--Home-->
         <scene sceneID="wg7-f3-ORb">
