@@ -11,8 +11,6 @@ In current version:
 TO-DO:
   * Implement background which changes due to weather/time of day
   * Fix bugs, make code better
-  * Implement user geolocation control in settings
-  * Save user home city location somehow
   
   
 Screenshots:
