@@ -18,4 +18,3 @@ Screenshots:
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot1.png?raw=true" width="320">
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot2.png?raw=true" width="320">
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot3.png?raw=true" width="320">
-<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot4.png?raw=true" width="320">
