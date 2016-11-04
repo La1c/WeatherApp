@@ -11,8 +11,6 @@ In current version:
 TO-DO:
   * Implement background which changes due to weather/time of day
   * Fix bugs, make code better
-  * Implement user geolocation control in settings
-  * Save user home city location somehow
   
   
 Screenshots:
@@ -20,4 +18,3 @@ Screenshots:
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot1.png?raw=true" width="320">
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot2.png?raw=true" width="320">
 <img src="https://github.com/La1c/WeatherApp/blob/master/screenshot3.png?raw=true" width="320">
-<img src="https://github.com/La1c/WeatherApp/blob/master/screenshot4.png?raw=true" width="320">
